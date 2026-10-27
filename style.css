@@ -57,9 +57,13 @@ button { border: none; cursor: pointer; }
 .mini { width: 26px; height: 26px; border-radius: 7px; background: var(--line); font-size: 14px; line-height: 1; padding: 0; }
 
 /* ---------- 打卡表单 ---------- */
-/* 7 个部位排成一行，每格一样宽 */
-.chips { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 8px; }
-.chip { padding: 7px 0; border-radius: 999px; background: var(--line); font-size: 14px; }
+/* 打卡模块要素多，内边距和行距比其它卡片宽松一些 */
+.form { padding: 16px 14px; }
+.form .card-head { margin-bottom: 12px; }
+
+/* 7 个部位排成一行，每格一样宽，格子之间留 8px */
+.chips { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 14px; }
+.chip { padding: 9px 0; border-radius: 999px; background: var(--line); font-size: 14px; }
 .chip[aria-pressed="true"] { background: var(--accent); color: #f4f1ec; }
 
 /* 体重输入和打卡按钮放在同一行 */
@@ -67,7 +71,7 @@ button { border: none; cursor: pointer; }
 /* 输入框字号必须 ≥16px，否则 iPhone 一点输入框整个页面就会自动放大 */
 .entry input {
   flex: 1; min-width: 0;
-  font-size: 16px; padding: 6px 8px;
+  font-size: 16px; padding: 8px 10px;
   border-radius: 8px; border: 1px solid var(--line);
   background: var(--bg); color: var(--text);
 }
@@ -78,7 +82,7 @@ button { border: none; cursor: pointer; }
 .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
 .cal-week, .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; }
 .cal-week { color: var(--muted); font-size: 11px; margin-bottom: 3px; }
-.cal-day { height: 32px; border-radius: 8px; background: var(--bg); font-size: 13px; padding: 0; }
+.cal-day { height: 30px; border-radius: 8px; background: var(--bg); font-size: 13px; padding: 0; }
 .cal-day.today { color: var(--accent); font-weight: 700; }
 .cal-day.done { background: var(--accent); color: #f4f1ec; font-weight: 700; }
 .cal-day.selected { outline: 2px solid var(--text); outline-offset: -2px; }
