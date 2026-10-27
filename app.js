@@ -189,11 +189,13 @@ function renderChart() {
 
   const box = $('chart');
   if (pts.length < 2) {
-    box.innerHTML = '<p class="hint">记录 2 天以上的体重后，这里会出现曲线</p>';
+    $('chartSummary').textContent = '';
+    box.innerHTML = '<span class="hint">记录 2 天以上的体重后，这里会出现曲线</span>';
     return;
   }
 
-  const W = 320, H = 160, padX = 36, padY = 16;
+  // 高度压到 110，让整页在一屏内放得下
+  const W = 320, H = 110, padX = 32, padY = 8;
   const ws = pts.map((p) => p.w);
   const lo = Math.min(...ws), hi = Math.max(...ws);
   // 上下各留一点空，避免线贴边；体重几乎不变时也别让线挤成一条
@@ -214,8 +216,8 @@ function renderChart() {
   const diff = last - first;
   const diffText = diff === 0 ? '持平' : `${diff > 0 ? '+' : ''}${diff.toFixed(1)} kg`;
 
+  $('chartSummary').innerHTML = `最新 <b>${last.toFixed(1)}</b> kg · 较 ${md(pts[0].key)} ${diffText}`;
   box.innerHTML = `
-    <p class="chart-summary">最新 <b>${last.toFixed(1)}</b> kg · 较 ${md(pts[0].key)} ${diffText}</p>
     <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="体重变化曲线">
       ${guide(hi)}${hi !== lo ? guide(lo) : ''}
       <polyline points="${line}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>

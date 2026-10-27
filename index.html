@@ -16,6 +16,10 @@
   <!-- 主屏幕上显示的图标 -->
   <link rel="apple-touch-icon" href="icon-180.png">
   <link rel="manifest" href="manifest.json">
+  <!-- 思源宋体（Noto Serif SC）：Google 会把字体切成很多小块，页面用到哪些字才下载哪些 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -29,33 +33,35 @@
         <div class="stat-label">连续打卡（天）</div>
       </div>
       <div class="stat">
-        <div class="stat-num"><span id="weekDone">0</span><small>/<span id="weekGoal">4</span></small></div>
-        <div class="stat-label">
-          本周目标
-          <button class="mini" id="goalMinus" aria-label="减少每周目标">−</button>
-          <button class="mini" id="goalPlus" aria-label="增加每周目标">+</button>
+        <div class="stat-top">
+          <div class="stat-num"><span id="weekDone">0</span><small>/<span id="weekGoal">4</span></small></div>
+          <div class="goal-btns">
+            <button class="mini" id="goalMinus" aria-label="减少每周目标">−</button>
+            <button class="mini" id="goalPlus" aria-label="增加每周目标">+</button>
+          </div>
         </div>
+        <div class="stat-label">本周目标</div>
         <div class="bar"><div class="bar-fill" id="weekBar"></div></div>
       </div>
     </section>
 
-    <!-- 打卡表单：选部位 + 选填体重 -->
+    <!-- 打卡表单：选部位 + 选填体重；提示文字放在标题右边，不额外占一行 -->
     <section class="card">
-      <h2 id="formTitle">今天练了什么？</h2>
+      <div class="card-head">
+        <h2 id="formTitle">今天练了什么？</h2>
+        <span class="hint" id="hint"></span>
+      </div>
       <div class="chips" id="parts"></div>
-      <label class="weight">
-        体重（选填）
-        <input id="weight" type="number" inputmode="decimal" step="0.1" min="20" max="300" placeholder="例如 65.5">
-        kg
-      </label>
-      <div class="actions">
+      <div class="entry">
+        <label for="weight">体重</label>
+        <input id="weight" type="number" inputmode="decimal" step="0.1" min="20" max="300" placeholder="选填">
+        <span>kg</span>
         <button class="primary" id="saveBtn">打卡</button>
         <button class="ghost" id="deleteBtn" hidden>删除</button>
       </div>
-      <p class="hint" id="hint"></p>
     </section>
 
-    <!-- 日历 -->
+    <!-- 日历：点某一天可以补卡或修改 -->
     <section class="card">
       <div class="cal-head">
         <button class="mini" id="prevMonth" aria-label="上个月">‹</button>
@@ -66,12 +72,14 @@
         <div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div><div>日</div>
       </div>
       <div class="cal-grid" id="calGrid"></div>
-      <p class="hint">点日历上的某一天，可以补卡或修改那天的记录</p>
     </section>
 
-    <!-- 体重曲线 -->
+    <!-- 体重曲线：最新体重放在标题右边 -->
     <section class="card">
-      <h2>体重曲线</h2>
+      <div class="card-head">
+        <h2>体重曲线</h2>
+        <span class="chart-summary" id="chartSummary"></span>
+      </div>
       <div id="chart"></div>
     </section>
   </main>
