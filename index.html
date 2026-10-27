@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <!-- viewport-fit=cover：让页面铺满到刘海/灵动岛区域，配合 CSS 里的 env(safe-area-inset-*) 留出安全边距 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>健身打卡</title>
+
+  <!-- 下面几行决定「添加到主屏幕」后的表现：全屏打开、没有 Safari 地址栏 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- 状态栏用默认样式（黑字），因为页面换成了浅色背景；透明白字的样式在浅色背景上会看不清 -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="健身打卡">
+  <meta name="theme-color" content="#e6e1db">
+  <!-- 主屏幕上显示的图标 -->
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>健身打卡</h1>
+
+    <!-- 顶部两个数字：连续天数、本周进度 -->
+    <section class="stats">
+      <div class="stat">
+        <div class="stat-num" id="streak">0</div>
+        <div class="stat-label">连续打卡（天）</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span id="weekDone">0</span><small>/<span id="weekGoal">4</span></small></div>
+        <div class="stat-label">
+          本周目标
+          <button class="mini" id="goalMinus" aria-label="减少每周目标">−</button>
+          <button class="mini" id="goalPlus" aria-label="增加每周目标">+</button>
+        </div>
+        <div class="bar"><div class="bar-fill" id="weekBar"></div></div>
+      </div>
+    </section>
+
+    <!-- 打卡表单：选部位 + 选填体重 -->
+    <section class="card">
+      <h2 id="formTitle">今天练了什么？</h2>
+      <div class="chips" id="parts"></div>
+      <label class="weight">
+        体重（选填）
+        <input id="weight" type="number" inputmode="decimal" step="0.1" min="20" max="300" placeholder="例如 65.5">
+        kg
+      </label>
+      <div class="actions">
+        <button class="primary" id="saveBtn">打卡</button>
+        <button class="ghost" id="deleteBtn" hidden>删除</button>
+      </div>
+      <p class="hint" id="hint"></p>
+    </section>
+
+    <!-- 日历 -->
+    <section class="card">
+      <div class="cal-head">
+        <button class="mini" id="prevMonth" aria-label="上个月">‹</button>
+        <h2 id="monthTitle"></h2>
+        <button class="mini" id="nextMonth" aria-label="下个月">›</button>
+      </div>
+      <div class="cal-week">
+        <div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div><div>日</div>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <p class="hint">点日历上的某一天，可以补卡或修改那天的记录</p>
+    </section>
+
+    <!-- 体重曲线 -->
+    <section class="card">
+      <h2>体重曲线</h2>
+      <div id="chart"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
