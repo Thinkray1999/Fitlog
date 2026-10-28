@@ -13,11 +13,11 @@
 
 html, body { background: var(--bg); }
 
-/* 宋体优先用思源宋体；加载不到时用系统里的宋体 */
+/* 字体用朱雀仿宋；加载不到时用系统里的仿宋，再不行用宋体 */
 body {
   margin: 0;
   color: var(--text);
-  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-family: "Zhuque Fangsong", "FangSong", "STFangsong", "Songti SC", serif;
   font-size: 14px;
   -webkit-tap-highlight-color: transparent; /* 去掉 iPhone 点按时的灰色闪块 */
   -webkit-text-size-adjust: 100%;
